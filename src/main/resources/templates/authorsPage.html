@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Authors Page</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div align="center" class="container my-2">
+	<a th:href="@{/showNewAuthorForm}"
+			class="btn btn-primary btn-sm mb-3" >Add Author </a>
+		<h1>Author List</h1>
+		<table border="1" class="table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>Author Name</th>
+					<th>Description</th>
+					<th>Actions</th>
+				</tr>
+				<div>
+					<form th:action="@{/authorsPage}">
+						Filter:
+						<input type="text" name="keyword" th:value=${keyword} required>
+						&nbsp;
+						<input type="submit" value="Search"/>
+						<input type="button" value="Clear"/>
+					</form>
+						<br><br>
+				</div>
+			</thead>
+			<tbody>
+				<tr th:each="author: ${listAuthors}">
+					<td th:text="${author.name}" align="center"></td>
+					<td th:text="${author.description}" align="center"></td>
+					<td align="center"><a th:href="@{/showEditAuthorForm/{id}(id=${author.id})}"
+						class="btn btn-primary" >Update</a>
+					<a th:href="@{/deleteAuthor/{id}(id=${author.id})}"
+						class="btn btn-danger" >Delete</a></td>
+			</tbody>
+		</table>
+		<hr>
+		<b>  <a href="authorsPage">Authors Page</a>&nbsp;
+			 <a href="booksPage">Books Page</a>&nbsp;
+			 <a href="publishersPage">Publishers Page</a>&nbsp;
+		</b>
+	</div>
+</body>
+</html>
